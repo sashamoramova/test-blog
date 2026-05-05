@@ -1,0 +1,33 @@
+# Dependencies
+/vendor/
+/node_modules/
+
+# Smarty compiled templates and cache
+/templates_c/
+/templates_cache/
+
+# Environment
+.env
+.env.local
+
+# Compiled CSS (built by node container)
+/public/css/
+
+# Uploaded images (keep directory)
+/public/uploads/*
+!/public/uploads/.gitkeep
+
+# Logs
+/logs/
+*.log
+
+# IDE / editors
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db

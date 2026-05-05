@@ -1,0 +1,81 @@
+services:
+  nginx:
+    image: nginx:1.25-alpine
+    container_name: test-blog-nginx
+    ports:
+      - "3000:80"
+    volumes:
+      - ./public:/var/www/html/public:ro
+      - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - php
+    networks:
+      - blog
+
+  php:
+    build:
+      context: .
+      dockerfile: docker/php/Dockerfile
+    container_name: test-blog-php
+    working_dir: /var/www/html
+    volumes:
+      - ./:/var/www/html
+    environment:
+      DB_HOST: ${DB_HOST}
+      DB_PORT: ${DB_PORT}
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_USER}
+      DB_PASS: ${DB_PASS}
+      APP_ENV: ${APP_ENV}
+      APP_URL: ${APP_URL}
+      ARTICLES_PER_PAGE: ${ARTICLES_PER_PAGE}
+    depends_on:
+      - mysql
+    networks:
+      - blog
+
+  # SCSS watcher — optional, requires npm registry access during build.
+  # Enable explicitly: `docker compose --profile styles up -d`.
+  # Without it, compile CSS once with the helper command from README.
+  node:
+    profiles: ["styles"]
+    build:
+      context: .
+      dockerfile: docker/node/Dockerfile
+    container_name: test-blog-node
+    working_dir: /app
+    volumes:
+      - ./scss:/app/scss
+      - ./public/css:/app/public/css
+    command: sass --watch /app/scss/main.scss:/app/public/css/main.css
+    networks:
+      - blog
+
+  mysql:
+    image: mysql:8.0-debian
+    container_name: test-blog-mysql
+    environment:
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASS}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASS}
+    # Внутри сети контейнеры обращаются по имени `mysql:3306`. Внешний проброс
+    # включай вручную, если нужен доступ с хоста (и порт 3306 свободен):
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+      - --port=3306
+      - --bind-address=0.0.0.0
+    networks:
+      - blog
+
+volumes:
+  mysql-data:
+
+networks:
+  blog:
+    driver: bridge
