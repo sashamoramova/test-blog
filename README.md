@@ -45,9 +45,7 @@ docker compose exec -T mysql mysql -h127.0.0.1 -uroot -proot blog < migrations/0
 docker compose exec php php seeds/seed.php
 ```
 
-## Либо запуск одной командой
-
-Если в проекте есть скрипты:
+## Либо запуск одной командой через скрипты
 
 - Linux/macOS:
   ```bash
