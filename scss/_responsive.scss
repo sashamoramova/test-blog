@@ -1,0 +1,44 @@
+@use 'variables' as *;
+
+// Mobile-first overrides for narrow screens.
+@media (max-width: $bp-md) {
+    .page-title {
+        font-size: 1.5rem;
+    }
+
+    .category-block {
+        padding: $space-4;
+    }
+
+    .article {
+        padding: $space-5 $space-4;
+
+        &__title {
+            font-size: 1.45rem;
+        }
+    }
+
+    .site-header__inner {
+        flex-direction: column;
+        gap: $space-2;
+        align-items: flex-start;
+    }
+}
+
+@media (max-width: $bp-sm) {
+    .article-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .article-card__media img {
+        height: 200px;
+    }
+
+    .pagination {
+        justify-content: center;
+    }
+
+    .sort-bar {
+        flex-wrap: wrap;
+    }
+}

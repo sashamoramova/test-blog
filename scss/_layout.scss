@@ -1,0 +1,162 @@
+@use 'variables' as *;
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: $font-base;
+    color: $color-text;
+    background: $color-bg;
+    line-height: 1.55;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+a {
+    color: $color-primary;
+    text-decoration: none;
+
+    &:hover {
+        color: $color-primary-hover;
+        text-decoration: underline;
+    }
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+.container {
+    max-width: $container-max;
+    margin: 0 auto;
+    padding: 0 $space-4;
+}
+
+.main {
+    flex: 1;
+    padding-top: $space-6;
+    padding-bottom: $space-8;
+}
+
+.site-header {
+    background: $color-surface;
+    border-bottom: 1px solid $color-border;
+    padding: $space-3 0;
+
+    &__inner {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &__logo {
+        font-weight: 700;
+        font-size: 1.15rem;
+        color: $color-text;
+
+        &:hover {
+            color: $color-primary;
+            text-decoration: none;
+        }
+    }
+
+    &__nav a {
+        color: $color-muted;
+        margin-left: $space-4;
+    }
+}
+
+.site-footer {
+    background: $color-surface;
+    border-top: 1px solid $color-border;
+    padding: $space-4 0;
+    font-size: 0.9rem;
+    color: $color-muted;
+    text-align: center;
+}
+
+.page-title {
+    font-size: 1.75rem;
+    margin: 0 0 $space-5;
+}
+
+.button {
+    display: inline-block;
+    padding: $space-2 $space-4;
+    background: $color-primary;
+    color: #fff;
+    border-radius: $radius;
+    border: none;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: background 0.15s;
+
+    &:hover {
+        background: $color-primary-hover;
+        color: #fff;
+        text-decoration: none;
+    }
+
+    &--secondary {
+        background: transparent;
+        color: $color-primary;
+        border: 1px solid $color-primary;
+
+        &:hover {
+            background: $color-primary;
+            color: #fff;
+        }
+    }
+}
+
+.back-link {
+    display: inline-block;
+    margin-bottom: $space-3;
+    color: $color-muted;
+    font-size: 0.9rem;
+
+    &:hover {
+        color: $color-primary;
+        text-decoration: none;
+    }
+}
+
+.badge {
+    display: inline-block;
+    padding: 2px $space-2;
+    background: $color-badge-bg;
+    color: $color-badge-text;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    margin-right: $space-2;
+
+    &:hover {
+        text-decoration: none;
+        background: darken($color-badge-bg, 5%);
+    }
+}
+
+.dot {
+    color: $color-muted;
+    margin: 0 $space-2;
+}
+
+.empty-state {
+    color: $color-muted;
+    background: $color-surface;
+    border: 1px dashed $color-border;
+    padding: $space-5;
+    border-radius: $radius;
+    text-align: center;
+}

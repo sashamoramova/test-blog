@@ -1,0 +1,185 @@
+@use 'variables' as *;
+
+// ---------- Article card ----------
+.article-grid {
+    display: grid;
+    gap: $space-4;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    margin-bottom: $space-5;
+
+    &--list {
+        grid-template-columns: 1fr;
+    }
+}
+
+.article-card {
+    background: $color-surface;
+    border: 1px solid $color-border;
+    border-radius: $radius;
+    overflow: hidden;
+    box-shadow: $shadow;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.15s, box-shadow 0.15s;
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+    }
+
+    &__media img {
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+        display: block;
+    }
+
+    &__placeholder {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 180px;
+        background: linear-gradient(135deg, $color-bg, $color-border);
+        color: $color-muted;
+        font-size: 0.95rem;
+    }
+
+    &__body {
+        padding: $space-4;
+        display: flex;
+        flex-direction: column;
+        gap: $space-2;
+        flex: 1;
+    }
+
+    &__title {
+        margin: 0;
+        font-size: 1.1rem;
+        line-height: 1.35;
+
+        a {
+            color: $color-text;
+
+            &:hover {
+                color: $color-primary;
+                text-decoration: none;
+            }
+        }
+    }
+
+    &__desc {
+        margin: 0;
+        color: $color-muted;
+        font-size: 0.95rem;
+    }
+
+    &__meta {
+        margin: 0;
+        margin-top: auto;
+        font-size: 0.85rem;
+        color: $color-muted;
+    }
+}
+
+// ---------- Home (categories on home page) ----------
+.category-block {
+    background: $color-surface;
+    border: 1px solid $color-border;
+    border-radius: $radius;
+    padding: $space-5;
+    margin-bottom: $space-5;
+    box-shadow: $shadow;
+
+    &__header {
+        margin-bottom: $space-4;
+    }
+
+    &__title {
+        margin: 0 0 $space-2;
+        font-size: 1.3rem;
+
+        a {
+            color: $color-text;
+
+            &:hover {
+                color: $color-primary;
+                text-decoration: none;
+            }
+        }
+    }
+
+    &__desc {
+        margin: 0;
+        color: $color-muted;
+    }
+}
+
+// ---------- Category page ----------
+.category-header {
+    margin-bottom: $space-5;
+
+    &__desc {
+        color: $color-muted;
+        margin: 0 0 $space-2;
+    }
+
+    &__meta {
+        font-size: 0.9rem;
+        color: $color-muted;
+        margin: 0;
+    }
+}
+
+.sort-bar {
+    display: flex;
+    gap: $space-2;
+    align-items: center;
+    margin-bottom: $space-4;
+    color: $color-muted;
+    font-size: 0.95rem;
+
+    select {
+        padding: 4px $space-2;
+        border-radius: $radius;
+        border: 1px solid $color-border;
+        background: $color-surface;
+        font: inherit;
+    }
+}
+
+// ---------- Pagination ----------
+.pagination {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $space-2;
+    margin-top: $space-5;
+    align-items: center;
+
+    &__link,
+    &__current {
+        padding: $space-2 $space-3;
+        border-radius: $radius;
+        border: 1px solid $color-border;
+        background: $color-surface;
+        font-size: 0.9rem;
+        color: $color-text;
+    }
+
+    &__link:hover {
+        background: $color-bg;
+        color: $color-primary;
+        text-decoration: none;
+    }
+
+    &__link--disabled {
+        color: $color-muted;
+        pointer-events: none;
+        opacity: 0.6;
+    }
+
+    &__current {
+        background: $color-primary;
+        color: #fff;
+        border-color: $color-primary;
+    }
+}
